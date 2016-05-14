@@ -1,10 +1,11 @@
-<h1 class="text-center">Random Card</h1>
-<div class="container">
-  <div class="col-lg-2 green">
-    HI
-  </div>
-
-  <div class="col-lg-2 red">
-    GWEN
+<div class="container-fluid">
+  <%= link_to "New Deck", new_deck_path %>
+  <h3 class="text-center">Random Card</h3>
+  <div class="col-lg-2">
+    <ul>
+    <% @decks.each do |d| %>
+      <li><%= link_to d.name, d %></li>
+    <% end %>
+    </ul>
   </div>
 </div>
