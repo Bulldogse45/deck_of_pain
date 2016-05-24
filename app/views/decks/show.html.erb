@@ -1,1 +1,10 @@
 <h1 class="text-center"><%= @deck.name %></h1>
+<ul>
+  <% @deck.cards.each do |c| %>
+    <% if c.turned %>
+      <li><%= link_to c.name, c %></li>
+    <% else %>
+      <li><%= link_to "Not Turned", c %></li>
+    <% end %>
+  <% end %>
+</ul>
