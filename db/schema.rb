@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160514014705) do
+ActiveRecord::Schema.define(version: 20160524004216) do
 
   create_table "cards", force: :cascade do |t|
     t.string   "face"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20160514014705) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "deck_id"
+    t.boolean  "turned"
   end
 
   create_table "decks", force: :cascade do |t|
@@ -27,6 +28,15 @@ ActiveRecord::Schema.define(version: 20160514014705) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "max_face"
+  end
+
+  create_table "suits", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "exercise_id"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "deck_id"
   end
 
 end

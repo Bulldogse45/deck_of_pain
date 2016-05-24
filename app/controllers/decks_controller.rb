@@ -1,5 +1,6 @@
 class DecksController < ApplicationController
   FACES = %w(2 3 4 5 6 7 8 9 10 Jack Queen King Ace)
+  SUITS = %w(Spades Hearts Diamonds Clubs)
 
   def index
     @decks = Deck.all
@@ -7,6 +8,11 @@ class DecksController < ApplicationController
 
   def create
     @deck = Deck.new(deck_params)
+    FACES.each do |f|
+      SUITS.each do |s|
+        @deck.cards << Card.new(suit:s, face:f)
+      end
+    end
     if @deck.save
       redirect_to @deck
     else
