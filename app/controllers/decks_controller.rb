@@ -33,6 +33,14 @@ class DecksController < ApplicationController
     @deck = Deck.find(params['id'])
   end
 
+  def reset
+    @deck = Deck.find(params['id'])
+    @deck.cards.each do |c|
+      c.update(turned: false)
+    end
+    render "show"
+  end
+
   def update
     @deck = Deck.find(params[:id])
     if @deck.update(link_params)
