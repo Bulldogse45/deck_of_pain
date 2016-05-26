@@ -1,10 +1,11 @@
 <h1 class="text-center"><%= @deck.name %></h1>
-<ul>
-  <% @deck.cards.each do |c| %>
+<div class="container">
+  <% @deck.cards.shuffle.each do |c| %>
     <% if c.turned %>
-      <li><%= link_to c.name, c %></li>
+      <div class="col-sm-2"><%= link_to c.name, c %></div>
     <% else %>
-      <li><%= link_to "Not Turned", c %></li>
+      <div class="col-sm-2"><%= link_to "Not Turned", c %></div>
     <% end %>
   <% end %>
-</ul>
+</div>
+<%= link_to "Reset", deck_reset_path, :class => "btn btn-primary" %>
