@@ -2,10 +2,14 @@
   <div class="col-lg-12">
       <h1 class="page-header"><%=@deck.name%></h1>
   </div>
-  <% @deck.cards.shuffle.each do |c| %>
-    <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+  <% @deck.cards.each do |c| %>
+    <div class="col-lg-1 col-md-2 col-xs-4 thumb">
       <%= link_to c do %>
-        <img class="img-responsive" src="http://placehold.it/400x200" alt="">
+        <% if c.turned %>
+          <%= image_tag(c.image_name, class:'auto-size') %>
+        <% else %>
+          <%= image_tag("back_of_card", class:'auto-size') %>
+        <% end %>
       <% end %>
     </div>
   <% end %>

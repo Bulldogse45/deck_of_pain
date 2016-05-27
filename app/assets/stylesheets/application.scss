@@ -13,3 +13,9 @@
  */
  @import "bootstrap-sprockets";
  @import "bootstrap";
+ @import "thumbnail-gallery";
+
+ .auto-size{
+   height: 100%;
+   width: 100%;
+ }
