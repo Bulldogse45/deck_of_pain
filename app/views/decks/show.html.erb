@@ -1,11 +1,17 @@
-<h1 class="text-center"><%= @deck.name %></h1>
 <div class="container">
-  <% @deck.cards.shuffle.each do |c| %>
-    <% if c.turned %>
-      <div class="col-sm-2"><%= link_to c.name, c %></div>
-    <% else %>
-      <div class="col-sm-2"><%= link_to "Not Turned", c %></div>
-    <% end %>
+  <div class="col-lg-12">
+      <h1 class="page-header"><%=@deck.name%></h1>
+  </div>
+  <% @deck.cards.each do |c| %>
+    <div class="col-lg-1 col-md-2 col-xs-4 thumb">
+      <%= link_to c do %>
+        <% if c.turned %>
+          <%= image_tag(c.image_name, class:'auto-size') %>
+        <% else %>
+          <%= image_tag("back_of_card", class:'auto-size') %>
+        <% end %>
+      <% end %>
+    </div>
   <% end %>
 </div>
 <%= link_to "Reset", deck_reset_path, :class => "btn btn-primary" %>

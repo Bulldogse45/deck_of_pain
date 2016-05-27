@@ -13,10 +13,9 @@
  */
  @import "bootstrap-sprockets";
  @import "bootstrap";
+ @import "thumbnail-gallery";
 
- .red {
-   background-color: red;
- }
- .green {
-   background-color: green;
+ .auto-size{
+   height: 100%;
+   width: 100%;
  }

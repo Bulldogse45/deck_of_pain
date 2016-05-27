@@ -10,7 +10,9 @@ class DecksController < ApplicationController
     @deck = Deck.new(deck_params)
     FACES.each do |f|
       SUITS.each do |s|
-        @deck.cards << Card.new(suit:s, face:f)
+        c = Card.new(suit:s, face:f)
+        c.image_name = "#{f}_of_#{s}".downcase
+        @deck.cards << c
       end
     end
     if @deck.save
