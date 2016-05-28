@@ -8,13 +8,7 @@ class DecksController < ApplicationController
 
   def create
     @deck = Deck.new(deck_params)
-    FACES.each do |f|
-      SUITS.each do |s|
-        c = Card.new(suit:s, face:f)
-        c.image_name = "#{f}_of_#{s}".downcase
-        @deck.cards << c
-      end
-    end
+    new_cards_for_deck
     if @deck.save
       redirect_to @deck
     else
@@ -45,14 +39,20 @@ class DecksController < ApplicationController
 
   def draw
     @deck = Deck.find(params['id'])
-    card = @deck.cards.shuffle.shift
-    card.update(turned:true)
+    cards = @deck.cards.where(turned:false)
+    if cards.count > 0
+      card = cards.shuffle.shift
+      card.update(turned:true)
+    end
     render "show"
   end
 
   def update
     @deck = Deck.find(params[:id])
-    if @deck.update(link_params)
+    @deck.update(deck_params)
+    @deck.cards = []
+    new_cards_for_deck
+    if @deck.save
       redirect_to @deck
     else
       render "new"
@@ -69,5 +69,17 @@ class DecksController < ApplicationController
 
   def deck_params
     params.require(:deck).permit(:name, :max_face)
+  end
+
+  def new_cards_for_deck
+    FACES.each do |f|
+      break if f > @deck.max_face
+      SUITS.each do |s|
+        c = Card.new(suit:s, face:f)
+        c.image_name = "#{f}_of_#{s}".downcase
+        c.update(turned: false)
+        @deck.cards << c
+      end
+    end
   end
 end
