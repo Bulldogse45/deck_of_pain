@@ -43,6 +43,13 @@ class DecksController < ApplicationController
     render "show"
   end
 
+  def draw
+    @deck = Deck.find(params['id'])
+    card = @deck.cards.shuffle.shift
+    card.update(turned:true)
+    render "show"
+  end
+
   def update
     @deck = Deck.find(params[:id])
     if @deck.update(link_params)
